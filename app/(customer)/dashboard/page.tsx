@@ -9,9 +9,15 @@ export default async function DashboardPage() {
   if (!session) redirect('/login');
 
   await dbConnect();
-  const orders = await Order.find({
-    $or: [{ user: session.user?.id }, { guestEmail: session.user?.email }]
-  }).sort({ createdAt: -1 }).lean();
+  
+  const orders = (session.user?.id || session.user?.email) 
+    ? await Order.find({
+        $or: [
+          ...(session.user?.id ? [{ user: session.user.id }] : []),
+          ...(session.user?.email ? [{ guestEmail: session.user.email }] : [])
+        ]
+      }).sort({ createdAt: -1 }).lean()
+    : [];
 
   const serializedOrders = JSON.parse(JSON.stringify(orders));
 
