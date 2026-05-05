@@ -5,8 +5,11 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
   apiVersion: '2026-04-22.dahlia' as any,
 });
 
+import { auth } from '@/src/auth';
+
 export async function POST(req: Request) {
   try {
+    const sessionUser = await auth();
     const { items } = await req.json();
 
     if (!items || items.length === 0) {
@@ -33,6 +36,9 @@ export async function POST(req: Request) {
       mode: 'payment',
       shipping_address_collection: {
         allowed_countries: ['US', 'CA', 'GB'],
+      },
+      metadata: {
+        userId: sessionUser?.user?.id || '',
       },
       success_url: `${origin}/order-success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/checkout?canceled=true`,

@@ -32,8 +32,8 @@ export default function RegisterPage() {
         const data = await res.json();
         setError(data.error?.toUpperCase() || 'REGISTRATION FAILED');
       }
-    } catch (err) {
-      setError('NETWORK ERROR');
+    } catch (err: any) {
+      setError(`NETWORK ERROR: ${err.message || 'UNKNOWN'}`);
     } finally {
       setLoading(false);
     }

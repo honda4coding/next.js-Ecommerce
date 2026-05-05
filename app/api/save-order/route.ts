@@ -55,6 +55,7 @@ export async function GET(req: Request) {
     };
 
     const newOrder = new Order({
+      user: session.metadata?.userId || undefined,
       guestEmail: session.customer_details?.email,
       items,
       totalAmount: session.amount_total ? session.amount_total / 100 : 0,
