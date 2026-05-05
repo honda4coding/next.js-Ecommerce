@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛒 Premium eCommerce Platform
 
-## Getting Started
+A full-stack, enterprise-grade eCommerce platform built with Next.js 16, Tailwind CSS, MongoDB, and NextAuth. Features a Brutalist-Minimalist design language, a highly performant shopping cart using Redux Toolkit, and a fully functional Admin Dashboard.
 
-First, run the development server:
+## 🚀 Key Features
 
+- **Modern Architecture**: Built on Next.js App Router with Server Actions for highly secure, fast data mutations.
+- **State Management**: Global shopping cart state managed via `Redux Toolkit`.
+- **Secure Authentication**: Credentials-based login and Role-Based Access Control (RBAC) managed by `NextAuth.js v5`.
+- **Admin Dashboard**: Protect routes and comprehensive interfaces to manage Orders, Users, Products, Categories, and Real-Time Alerts.
+- **Advanced Filtering**: Server-side product searching and filtering by category, name, and price.
+- **Real-Time Notifications**: Smart, resource-efficient background polling for system alerts.
+
+---
+
+## 🛠️ Technology Stack
+
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router & Server Actions)
+- **Database**: [MongoDB](https://www.mongodb.com/) via [Mongoose](https://mongoosejs.com/)
+- **Authentication**: [NextAuth.js](https://next-auth.js.org/) (Credentials Provider + bcryptjs)
+- **State Management**: [Redux Toolkit](https://redux-toolkit.js.org/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Icons**: SVG / Tailwind primitives
+
+---
+
+## 💻 Getting Started (Local Development)
+
+### 1. Prerequisites
+Ensure you have Node.js and npm installed. You will also need a MongoDB URI.
+
+### 2. Installation
+Clone the repository and install dependencies:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Environment Variables
+Create a `.env.local` file in the root directory and add the following:
+```env
+MONGODB_URI=your_mongodb_connection_string
+NEXTAUTH_SECRET=your_super_secret_string
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 4. Seeding the Database
+To quickly populate your database with dummy data (products, categories, and test accounts), simply start the development server and visit the seed endpoint in your browser:
+```bash
+npm run dev
+```
+👉 Open your browser and go to: **[http://localhost:3000/api/seed](http://localhost:3000/api/seed)**
+*Note: This will clear your existing Products, Categories, and Users before inserting the new ones.*
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🔑 Test Accounts
 
-To learn more about Next.js, take a look at the following resources:
+After running the seed script above, you can log in and test the platform using the following accounts:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 🛡️ Admin Account (Access to Dashboard)
+- **Email:** `admin@admin.com`
+- **Password:** `adminpassword`
+- *Use this account to access the Admin Dashboard, add/edit products, manage orders, and send global alerts.*
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 👤 Customer Account (Standard User)
+- **Email:** `user@user.com`
+- **Password:** `userpassword`
+- *Use this account to experience the standard checkout flow, view order history, and test the cart.*
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📐 Project Structure Highlights
+- `app/(customer)/` - Public facing store pages.
+- `app/(admin)/` - Protected dashboard layout and pages.
+- `src/actions/` - Next.js Server Actions for secure DB mutations without traditional API endpoints.
+- `src/models/` - Mongoose Schemas (User, Product, Order, Category, Notification).
+- `src/store/` - Redux Toolkit global state definitions (slices and store).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+*Designed and developed as a Masterclass Showcase for Next.js eCommerce capabilities.*
