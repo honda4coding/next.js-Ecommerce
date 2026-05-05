@@ -34,7 +34,7 @@ export async function GET(req: Request) {
     }
 
     const items = await Promise.all((session.line_items?.data || []).map(async (item: any) => {
-      const productDoc = await Product.findOne({ name: item.description }).lean();
+      const productDoc = await Product.findOne({ name: item.description }).lean() as any;
       
       return {
         product: productDoc?._id || '000000000000000000000000', 
